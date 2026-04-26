@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-powered X-Ray analysis tool providing preliminary diagnostic insights using advanced vision AI. For educational purposes only.">
+  <title>RadiAI — AI X-Ray Reader</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩻</text></svg>">
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-scanner">
+      <div class="scan-ring"></div>
+      <div class="scan-ring"></div>
+      <div class="scan-ring"></div>
+      <div class="scan-icon">🩻</div>
+    </div>
+    <div class="loading-text">Analyzing X-Ray</div>
+    <div class="loading-subtext" id="loadingSubtext">Processing image with AI vision model...</div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-logo">🩻</div>
+      <h1 class="app-title">RadiAI</h1>
+      <p class="app-subtitle">AI-powered X-ray analysis providing preliminary diagnostic insights with advanced vision AI</p>
+    </header>
+
+    <!-- Disclaimer Banner -->
+    <div class="disclaimer-banner" id="disclaimerBanner">
+      <span class="icon">⚠️</span>
+      <p>
+        <strong>Medical Disclaimer:</strong> This tool provides <strong>preliminary analysis for educational purposes only</strong>. 
+        It is NOT a medical diagnosis and does NOT replace professional medical advice. 
+        All findings must be reviewed by a qualified radiologist. Always consult your healthcare provider.
+      </p>
+    </div>
+
+    <!-- Main Grid: Upload + Context -->
+    <div class="main-grid">
+
+      <!-- Upload Card -->
+      <div class="glass-card">
+        <h2 class="card-title"><span class="icon">📤</span> Upload X-Ray</h2>
+
+        <div class="upload-zone" id="uploadZone">
+          <span class="upload-icon">🩻</span>
+          <p class="upload-text">
+            <strong>Click to upload</strong> or drag & drop your X-ray image
+          </p>
+          <p class="upload-text-small">Supports JPG, PNG, WebP • Max 20MB</p>
+          <input type="file" class="upload-input" id="fileInput" accept=".jpg,.jpeg,.png,.webp">
+        </div>
+
+        <div class="image-preview" id="imagePreview">
+          <img id="previewImg" alt="X-ray preview">
+          <button class="remove-btn" id="removeBtn" title="Remove image">✕</button>
+          <div class="image-info">
+            <span id="fileName">—</span>
+            <span id="fileSize">—</span>
+          </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <button class="analyze-btn" id="analyzeBtn" disabled>
+          <span class="btn-icon">🔬</span>
+          <span>Analyze X-Ray</span>
+        </button>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+          <span class="error-icon">❌</span>
+          <div>
+            <div class="error-title" id="errorTitle">Analysis Failed</div>
+            <div class="error-text" id="errorText">Something went wrong.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patient Context Card -->
+      <div class="glass-card">
+        <h2 class="card-title"><span class="icon">🏥</span> Patient Context <span style="font-size: var(--font-size-xs); color: var(--text-muted); font-weight: 400;">(Optional)</span></h2>
+        
+        <div class="form-section">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="patientAge">Age</label>
+              <input type="number" class="form-input" id="patientAge" placeholder="e.g. 45" min="0" max="150">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="patientSex">Sex</label>
+              <select class="form-select" id="patientSex">
+                <option value="">— Select —</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="xrayType">X-Ray Type</label>
+            <select class="form-select" id="xrayType">
+              <option value="">— Auto-detect —</option>
+              <option value="chest">Chest X-Ray</option>
+              <option value="bone">Bone / Extremity X-Ray</option>
+              <option value="abdominal">Abdominal X-Ray</option>
+              <option value="dental">Dental X-Ray</option>
+              <option value="spine">Spine X-Ray</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="patientSymptoms">Presenting Symptoms</label>
+            <textarea class="form-textarea" id="patientSymptoms" placeholder="e.g. Chest pain, shortness of breath, cough for 2 weeks..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="medicalHistory">Medical History</label>
+            <textarea class="form-textarea" id="medicalHistory" placeholder="e.g. Hypertension, diabetes, previous surgeries, smoker..."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection">
+      <div class="results-header">
+        <h2 class="results-title">📋 Analysis Report</h2>
+        <div class="results-meta">
+          <span class="badge" id="urgencyBadge">—</span>
+          <span class="badge badge-confidence" id="confidenceBadge">—</span>
+          <button class="new-analysis-btn" id="newAnalysisBtn">+ New Analysis</button>
+        </div>
+      </div>
+
+      <div class="results-grid">
+        
+        <!-- Image Quality -->
+        <div class="result-card" id="qualityCard">
+          <div class="result-card-title">🔍 Image Quality</div>
+          <div class="quality-indicator" id="qualityIndicator">
+            <span class="quality-dot" id="qualityDot"></span>
+            <span class="quality-text" id="qualityText">—</span>
+          </div>
+        </div>
+
+        <!-- Body Part -->
+        <div class="result-card" id="bodyPartCard">
+          <div class="result-card-title">🦴 Anatomical Region</div>
+          <p id="bodyPartText" style="color: var(--text-heading); font-weight: 600; font-size: var(--font-size-lg);">—</p>
+        </div>
+
+        <!-- Findings -->
+        <div class="result-card full-width" id="findingsCard">
+          <div class="result-card-title">🔎 Findings</div>
+          <div id="findingsList">—</div>
+        </div>
+
+        <!-- Differential Diagnoses -->
+        <div class="result-card full-width" id="diagnosesCard">
+          <div class="result-card-title">🧪 Differential Diagnoses</div>
+          <div id="diagnosesList">—</div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="result-card" id="recommendationsCard">
+          <div class="result-card-title">💡 Recommendations</div>
+          <div id="recommendationsList">—</div>
+        </div>
+
+        <!-- Important Notes -->
+        <div class="result-card" id="notesCard">
+          <div class="result-card-title">📌 Important Notes</div>
+          <div id="notesList">—</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section" id="historySection">
+      <h2 class="history-title">🕒 Analysis History</h2>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">No analyses yet. Upload an X-ray to get started.</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>RadiAI — AI X-Ray Reader • For educational & informational purposes only</p>
+      <p style="margin-top: var(--space-xs);">Powered by Claude Vision AI • Not a substitute for professional medical advice</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

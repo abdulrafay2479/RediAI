@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Analysis History{% endblock %}
+{% block meta_description %}View your past X-ray analyses. Review previous reports, findings, and recommendations.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="section-container">
+    <h1 class="page-title">Analysis History</h1>
+    <p class="page-subtitle">Review your past X-ray analyses and reports</p>
+  </div>
+</section>
+
+<div class="section-container">
+  <div class="history-controls">
+    <div class="history-stats" id="historyStats">
+      <span class="stat-badge"><span id="totalAnalyses">0</span> analyses</span>
+    </div>
+    <button class="btn btn-outline btn-sm" id="clearHistoryBtn">Clear History</button>
+  </div>
+
+  <div class="history-list" id="historyList">
+    <div class="empty-state">
+      <div class="empty-icon">📭</div>
+      <h3 class="empty-title">No Analyses Yet</h3>
+      <p class="empty-desc">Upload an X-ray image to get your first AI-powered analysis.</p>
+      <a href="/analyze" class="btn btn-primary">Start Analysis</a>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="historyModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 class="modal-title">Analysis Report</h2>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}

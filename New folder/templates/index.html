@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block meta_description %}RadiAI - Professional AI-powered X-Ray Reader. Upload X-ray images for preliminary diagnostic analysis powered by advanced vision AI.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">AI-Powered Diagnostic Assistant</div>
+    <h1 class="hero-title">
+      Advanced X-Ray Analysis<br>
+      <span class="gradient-text">Powered by AI</span>
+    </h1>
+    <p class="hero-subtitle">
+      Upload your X-ray images and receive comprehensive preliminary diagnostic insights 
+      in seconds. Powered by state-of-the-art vision AI technology for educational use.
+    </p>
+    <div class="hero-actions">
+      <a href="/analyze" class="btn btn-primary btn-lg">
+        <span class="btn-icon">🔬</span> Start Analysis
+      </a>
+      <a href="/about" class="btn btn-outline btn-lg">
+        Learn More
+      </a>
+    </div>
+    <div class="hero-disclaimer">
+      <span class="disclaimer-icon">⚕️</span>
+      For educational purposes only — not a medical diagnosis tool
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-scan-container">
+      <div class="scan-circle scan-circle-1"></div>
+      <div class="scan-circle scan-circle-2"></div>
+      <div class="scan-circle scan-circle-3"></div>
+      <div class="scan-center-icon">🩻</div>
+      <div class="scan-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section features-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">Professional-Grade Analysis</h2>
+      <p class="section-subtitle">Comprehensive radiological assessment powered by advanced AI vision models</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">📤</span>
+        </div>
+        <h3 class="feature-title">Easy Upload</h3>
+        <p class="feature-desc">Drag & drop or click to upload X-ray images. Supports JPG, PNG, and WebP formats up to 20MB.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">🧠</span>
+        </div>
+        <h3 class="feature-title">AI Vision Analysis</h3>
+        <p class="feature-desc">State-of-the-art Claude Vision AI analyzes anatomical structures, identifies abnormalities, and generates differential diagnoses.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">📋</span>
+        </div>
+        <h3 class="feature-title">Structured Reports</h3>
+        <p class="feature-desc">Receive detailed reports with findings, severity indicators, urgency levels, and clinical recommendations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">🦴</span>
+        </div>
+        <h3 class="feature-title">Multi-Type Support</h3>
+        <p class="feature-desc">Specialized analysis for chest, bone, abdominal, dental, and spine X-rays with type-specific assessment criteria.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">🏥</span>
+        </div>
+        <h3 class="feature-title">Patient Context</h3>
+        <p class="feature-desc">Provide age, symptoms, and medical history for more accurate, contextual analysis results.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">🕒</span>
+        </div>
+        <h3 class="feature-title">Analysis History</h3>
+        <p class="feature-desc">All analyses are saved locally so you can review past reports anytime without re-uploading.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section how-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Three simple steps to get your preliminary X-ray analysis</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <h3 class="step-title">Upload X-Ray</h3>
+        <p class="step-desc">Upload your X-ray image using drag-and-drop or file selection. The system validates format and quality automatically.</p>
+      </div>
+      <div class="step-connector">
+        <div class="connector-line"></div>
+        <div class="connector-arrow">→</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <h3 class="step-title">AI Analysis</h3>
+        <p class="step-desc">Our AI vision model systematically evaluates anatomical structures, identifies findings, and generates differential diagnoses.</p>
+      </div>
+      <div class="step-connector">
+        <div class="connector-line"></div>
+        <div class="connector-arrow">→</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <h3 class="step-title">Review Report</h3>
+        <p class="step-desc">Receive a structured report with findings, severity levels, recommendations, and confidence assessment — all in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Supported Types Section -->
+<section class="section types-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">Supported X-Ray Types</h2>
+      <p class="section-subtitle">Specialized analysis protocols for each imaging type</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-icon">🫁</div>
+        <h3 class="type-title">Chest X-Ray</h3>
+        <p class="type-desc">Heart, lungs, mediastinum, rib cage, diaphragm, costophrenic angles, hilar regions</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🦴</div>
+        <h3 class="type-title">Bone / Extremity</h3>
+        <p class="type-desc">Fractures, alignment, cortical integrity, soft tissues, joints, growth plates</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🫃</div>
+        <h3 class="type-title">Abdominal</h3>
+        <p class="type-desc">Bowel patterns, air-fluid levels, organ silhouettes, calcifications, foreign bodies</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🦷</div>
+        <h3 class="type-title">Dental</h3>
+        <p class="type-desc">Tooth structure, root morphology, alveolar bone, caries, periapical pathology</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🔩</div>
+        <h3 class="type-title">Spine</h3>
+        <p class="type-desc">Vertebral alignment, disc spaces, facet joints, spinal canal, degenerative changes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta-section">
+  <div class="section-container">
+    <div class="cta-card">
+      <h2 class="cta-title">Ready to Analyze Your X-Ray?</h2>
+      <p class="cta-desc">Upload an image and get AI-powered preliminary diagnostics in seconds.</p>
+      <a href="/analyze" class="btn btn-primary btn-lg">
+        <span class="btn-icon">🔬</span> Start Free Analysis
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

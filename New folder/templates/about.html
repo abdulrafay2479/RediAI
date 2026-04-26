@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block meta_description %}Learn about RadiAI - AI-powered X-ray analysis tool. Read our medical disclaimer, privacy notice, and terms of use.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="section-container">
+    <h1 class="page-title">About RadiAI</h1>
+    <p class="page-subtitle">Understanding our AI-powered X-ray analysis platform</p>
+  </div>
+</section>
+
+<div class="section-container">
+  <div class="about-grid">
+
+    <!-- Overview -->
+    <div class="about-card">
+      <h2 class="about-card-title">🩻 What is RadiAI?</h2>
+      <p>RadiAI is an AI-powered X-ray analysis tool that leverages advanced computer vision technology to provide 
+      preliminary diagnostic insights from radiological images. It is designed to help medical students, healthcare 
+      professionals, and patients better understand X-ray findings.</p>
+      <p>Our system uses Claude's state-of-the-art vision capabilities to systematically evaluate X-ray images, 
+      identify anatomical structures, detect potential abnormalities, and generate structured diagnostic reports 
+      with findings, differential diagnoses, and recommendations.</p>
+    </div>
+
+    <!-- How It Works -->
+    <div class="about-card">
+      <h2 class="about-card-title">⚙️ How It Works</h2>
+      <div class="about-list">
+        <div class="about-list-item">
+          <span class="about-list-num">1</span>
+          <div>
+            <strong>Image Upload</strong>
+            <p>Users upload X-ray images in standard formats (JPG, PNG, WebP). The system validates format and quality.</p>
+          </div>
+        </div>
+        <div class="about-list-item">
+          <span class="about-list-num">2</span>
+          <div>
+            <strong>AI Vision Analysis</strong>
+            <p>The image is sent to Claude's vision model with specialized radiology prompts. The AI systematically evaluates 
+            anatomical structures and identifies findings.</p>
+          </div>
+        </div>
+        <div class="about-list-item">
+          <span class="about-list-num">3</span>
+          <div>
+            <strong>Report Generation</strong>
+            <p>Results are returned as a structured JSON report with findings, differentials, severity, urgency, 
+            and recommendations — all rendered in a clear, professional interface.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supported Types -->
+    <div class="about-card">
+      <h2 class="about-card-title">📊 Supported X-Ray Types</h2>
+      <div class="about-types-grid">
+        <div class="about-type"><span>🫁</span> Chest X-Ray</div>
+        <div class="about-type"><span>🦴</span> Bone / Extremity</div>
+        <div class="about-type"><span>🫃</span> Abdominal</div>
+        <div class="about-type"><span>🦷</span> Dental</div>
+        <div class="about-type"><span>🔩</span> Spine</div>
+      </div>
+      <p>Each type uses specialized analysis protocols focusing on relevant anatomical structures and common pathologies.</p>
+    </div>
+
+    <!-- Medical Disclaimer -->
+    <div class="about-card about-card-warning" id="disclaimer">
+      <h2 class="about-card-title">⚠️ Medical Disclaimer</h2>
+      <div class="disclaimer-content">
+        <p><strong>IMPORTANT: This application provides preliminary radiological analysis for educational 
+        purposes only. It is NOT a medical diagnosis and does NOT constitute medical advice.</strong></p>
+        
+        <h4>This tool CANNOT:</h4>
+        <ul>
+          <li>Diagnose medical conditions</li>
+          <li>Replace professional radiologists</li>
+          <li>Provide definitive medical interpretations</li>
+          <li>Serve as the basis for treatment decisions</li>
+        </ul>
+        
+        <h4>Users MUST:</h4>
+        <ul>
+          <li>Always consult with a qualified healthcare professional</li>
+          <li>Have all findings reviewed by a licensed radiologist</li>
+          <li>Seek immediate medical attention for urgent symptoms</li>
+          <li>Not delay seeking professional medical advice</li>
+        </ul>
+        
+        <h4>Liability:</h4>
+        <p>The developers and AI model providers assume no liability for misdiagnosis, missed diagnoses, 
+        errors in interpretation, patient decisions based on this analysis, or any harm resulting from 
+        use of this tool. By using this service, you acknowledge that this is not medical advice and 
+        you will consult with a healthcare provider for any medical decisions.</p>
+      </div>
+    </div>
+
+    <!-- Privacy Notice -->
+    <div class="about-card" id="privacy">
+      <h2 class="about-card-title">🔒 Privacy Notice</h2>
+      <ul class="about-privacy-list">
+        <li><strong>No Image Storage:</strong> Uploaded X-ray images are processed in memory and immediately deleted after analysis. No images are permanently stored on our servers.</li>
+        <li><strong>Local History:</strong> Analysis history is stored only in your browser's local storage. It never leaves your device.</li>
+        <li><strong>API Processing:</strong> Images are sent to the Claude Vision API for analysis. Please review Anthropic's privacy policy for details on how they handle data.</li>
+        <li><strong>No PII Required:</strong> Patient context fields (age, sex, symptoms) are optional and are only used to improve analysis accuracy. No personally identifiable information is stored.</li>
+      </ul>
+    </div>
+
+    <!-- Terms of Use -->
+    <div class="about-card" id="terms">
+      <h2 class="about-card-title">📜 Terms of Use</h2>
+      <p>By using RadiAI, you agree to the following:</p>
+      <ul>
+        <li>You understand this tool provides preliminary analysis for educational purposes only</li>
+        <li>You will not use this tool as a substitute for professional medical advice</li>
+        <li>You will consult qualified healthcare professionals for medical decisions</li>
+        <li>You assume full responsibility for how you use the analysis results</li>
+        <li>You will not upload images containing personal health information of others without consent</li>
+        <li>You acknowledge the limitations of AI-based image analysis</li>
+      </ul>
+    </div>
+
+    <!-- Technology -->
+    <div class="about-card">
+      <h2 class="about-card-title">🛠️ Technology Stack</h2>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <strong>AI Model</strong>
+          <span>Claude Vision (Anthropic)</span>
+        </div>
+        <div class="tech-item">
+          <strong>Backend</strong>
+          <span>Python / Flask</span>
+        </div>
+        <div class="tech-item">
+          <strong>Frontend</strong>
+          <span>HTML5 / CSS3 / JavaScript</span>
+        </div>
+        <div class="tech-item">
+          <strong>Design</strong>
+          <span>Custom Medical UI</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

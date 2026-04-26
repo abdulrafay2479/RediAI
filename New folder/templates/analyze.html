@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block title %}Analyze X-Ray{% endblock %}
+{% block meta_description %}Upload your X-ray image for AI-powered preliminary diagnostic analysis. Get structured reports with findings, diagnoses, and recommendations.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="section-container">
+    <h1 class="page-title">X-Ray Analysis</h1>
+    <p class="page-subtitle">Upload your X-ray image for AI-powered preliminary diagnostic insights</p>
+  </div>
+</section>
+
+<!-- Disclaimer Banner -->
+<div class="section-container">
+  <div class="disclaimer-banner" id="disclaimerBanner">
+    <span class="disclaimer-banner-icon">⚠️</span>
+    <p>
+      <strong>Medical Disclaimer:</strong> This tool provides
+      <strong>preliminary analysis for educational purposes only</strong>.
+      It is NOT a medical diagnosis and does NOT replace professional medical advice.
+      All findings must be reviewed by a qualified radiologist. Always consult your healthcare provider.
+    </p>
+  </div>
+</div>
+
+<!-- Main Analysis Grid -->
+<div class="section-container">
+  <div class="analyze-grid">
+
+    <!-- Left: Upload Card -->
+    <div class="glass-card">
+      <h2 class="card-title"><span class="card-icon">📤</span> Upload X-Ray Image</h2>
+
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-zone-inner">
+          <span class="upload-icon">🩻</span>
+          <p class="upload-text">
+            <strong>Click to upload</strong> or drag & drop your X-ray image
+          </p>
+          <p class="upload-text-small">Supports JPG, PNG, WebP &bull; Max 20MB</p>
+        </div>
+        <input type="file" class="upload-input" id="fileInput" accept=".jpg,.jpeg,.png,.webp">
+      </div>
+
+      <div class="image-preview" id="imagePreview">
+        <img id="previewImg" alt="X-ray preview">
+        <button class="remove-btn" id="removeBtn" title="Remove image">&times;</button>
+        <div class="image-info">
+          <span id="fileName">--</span>
+          <span id="fileSize">--</span>
+        </div>
+      </div>
+
+      <!-- Analyze Button -->
+      <button class="btn btn-primary btn-block" id="analyzeBtn" disabled>
+        <span class="btn-icon">🔬</span>
+        <span>Analyze X-Ray</span>
+      </button>
+
+      <!-- Error Message -->
+      <div class="error-message" id="errorMessage">
+        <span class="error-icon">❌</span>
+        <div>
+          <div class="error-title" id="errorTitle">Analysis Failed</div>
+          <div class="error-text" id="errorText">Something went wrong.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Patient Context Card -->
+    <div class="glass-card">
+      <h2 class="card-title"><span class="card-icon">🏥</span> Patient Context <span class="card-optional">(Optional)</span></h2>
+      <p class="card-desc">Providing patient information improves the accuracy and relevance of the analysis.</p>
+
+      <div class="form-section">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="patientAge">Age</label>
+            <input type="number" class="form-input" id="patientAge" placeholder="e.g. 45" min="0" max="150">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="patientSex">Biological Sex</label>
+            <select class="form-select" id="patientSex">
+              <option value="">-- Select --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="xrayType">X-Ray Type</label>
+          <select class="form-select" id="xrayType">
+            <option value="">-- Auto-detect --</option>
+            <option value="chest">Chest X-Ray</option>
+            <option value="bone">Bone / Extremity</option>
+            <option value="abdominal">Abdominal X-Ray</option>
+            <option value="dental">Dental X-Ray</option>
+            <option value="spine">Spine X-Ray</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="patientSymptoms">Presenting Symptoms</label>
+          <textarea class="form-textarea" id="patientSymptoms" rows="3" placeholder="e.g. Chest pain, shortness of breath, cough for 2 weeks..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="medicalHistory">Medical History</label>
+          <textarea class="form-textarea" id="medicalHistory" rows="3" placeholder="e.g. Hypertension, diabetes, previous surgeries, smoker..."></textarea>
+        </div>
+      </div>
+
+      <!-- Quick Info -->
+      <div class="context-info">
+        <div class="context-info-item">
+          <span class="context-info-icon">🔒</span>
+          <span>Data is not stored on our servers</span>
+        </div>
+        <div class="context-info-item">
+          <span class="context-info-icon">⚡</span>
+          <span>Analysis typically takes 10-20 seconds</span>
+        </div>
+        <div class="context-info-item">
+          <span class="context-info-icon">🎯</span>
+          <span>Add context for more accurate results</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-card">
+    <div class="loading-scanner">
+      <div class="scan-ring"></div>
+      <div class="scan-ring"></div>
+      <div class="scan-ring"></div>
+      <div class="scan-center-icon loading-icon">🩻</div>
+    </div>
+    <div class="loading-text">Analyzing X-Ray</div>
+    <div class="loading-subtext" id="loadingSubtext">Processing image with AI vision model...</div>
+    <div class="loading-progress">
+      <div class="loading-progress-bar" id="loadingProgressBar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Results Section -->
+<section class="results-section" id="resultsSection">
+  <div class="section-container">
+
+    <div class="results-header">
+      <div class="results-header-left">
+        <h2 class="results-title">📋 Analysis Report</h2>
+        <p class="results-timestamp" id="resultsTimestamp"></p>
+      </div>
+      <div class="results-header-right">
+        <span class="badge" id="urgencyBadge">--</span>
+        <span class="badge badge-confidence" id="confidenceBadge">--</span>
+        <button class="btn btn-outline btn-sm" id="newAnalysisBtn">+ New Analysis</button>
+      </div>
+    </div>
+
+    <!-- Report Disclaimer -->
+    <div class="report-disclaimer">
+      <span>⚕️</span>
+      <p>This is a <strong>preliminary AI-generated analysis</strong> for educational purposes only.
+      All findings must be reviewed and confirmed by a qualified radiologist. Do not make medical decisions based solely on this report.</p>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- Patient Friendly Summary -->
+      <div class="result-card result-card-full" id="summaryCard" style="display: none; background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+        <div class="result-card-title" style="color: var(--accent-blue-light);"><span class="rct-icon">💬</span> Simple Explanation</div>
+        <p id="patientSummaryText" style="font-size: 1.05rem; line-height: 1.6; color: var(--text-heading);"></p>
+      </div>
+
+      <!-- Image Quality & Body Part Row -->
+      <div class="result-card">
+        <div class="result-card-title"><span class="rct-icon">🔍</span> Image Quality</div>
+        <div class="quality-indicator" id="qualityIndicator">
+          <span class="quality-dot" id="qualityDot"></span>
+          <span class="quality-text" id="qualityText">--</span>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-title"><span class="rct-icon">🦴</span> Anatomical Region</div>
+        <p class="body-part-text" id="bodyPartText">--</p>
+      </div>
+
+      <!-- Findings -->
+      <div class="result-card result-card-full">
+        <div class="result-card-title"><span class="rct-icon">🔎</span> Findings</div>
+        <div id="findingsList">--</div>
+      </div>
+
+      <!-- Differential Diagnoses -->
+      <div class="result-card result-card-full">
+        <div class="result-card-title"><span class="rct-icon">🧪</span> Differential Diagnoses</div>
+        <div id="diagnosesList">--</div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="result-card">
+        <div class="result-card-title"><span class="rct-icon">💡</span> Recommendations</div>
+        <div id="recommendationsList">--</div>
+      </div>
+
+      <!-- Important Notes -->
+      <div class="result-card">
+        <div class="result-card-title"><span class="rct-icon">📌</span> Important Notes</div>
+        <div id="notesList">--</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

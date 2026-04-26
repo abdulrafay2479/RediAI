@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block meta_description %}RadiAI - Professional AI-powered X-Ray analysis providing preliminary diagnostic insights using advanced vision AI. For educational purposes only.{% endblock %}">
+  <title>{% block title %}RadiAI{% endblock %} — AI X-Ray Reader</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩻</text></svg>">
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+
+  <!-- Navigation -->
+  <nav class="main-nav" id="mainNav">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="nav-logo">🩻</span>
+        <span class="nav-brand-text">Radi<span class="accent">AI</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/" class="nav-link {% if active_page == 'home' %}active{% endif %}">Home</a>
+        <a href="/analyze" class="nav-link {% if active_page == 'analyze' %}active{% endif %}">Analyze X-Ray</a>
+        <a href="/history" class="nav-link {% if active_page == 'history' %}active{% endif %}">History</a>
+        <a href="/about" class="nav-link {% if active_page == 'about' %}active{% endif %}">About</a>
+        <a href="/analyze" class="nav-btn-primary">Start Analysis</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <span class="nav-logo">🩻</span>
+            <span class="nav-brand-text">Radi<span class="accent">AI</span></span>
+          </div>
+          <p class="footer-desc">AI-powered preliminary X-ray analysis for educational and informational purposes.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <a href="/" class="footer-link">Home</a>
+          <a href="/analyze" class="footer-link">Analyze X-Ray</a>
+          <a href="/history" class="footer-link">History</a>
+          <a href="/about" class="footer-link">About</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <a href="/about#disclaimer" class="footer-link">Medical Disclaimer</a>
+          <a href="/about#privacy" class="footer-link">Privacy Notice</a>
+          <a href="/about#terms" class="footer-link">Terms of Use</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Technology</h4>
+          <p class="footer-text">Powered by Claude Vision AI</p>
+          <p class="footer-text">Built with Python & Flask</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadiAI. For educational purposes only. Not a medical diagnosis tool.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
